@@ -1,0 +1,685 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY foaf "http://xmlns.com/foaf/0.1/" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY teach "http://linkedscience.org/teach/ns#" >
+    <!ENTITY aiiso "http://purl.org/vocab/aiiso/schema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://purl.org/ldau/schema#"
+     xml:base="http://purl.org/ldau/schema"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:aiiso="http://purl.org/vocab/aiiso/schema#"
+     xmlns:teach="http://linkedscience.org/teach/ns#">
+    <owl:Ontology rdf:about="http://purl.org/ldau/schema">
+        <rdfs:label xml:lang="es">Ontología Académica.</rdfs:label>
+        <owl:versionInfo>1.0</owl:versionInfo>
+        <dc:title xml:lang="en">Linking Data Academic University</dc:title>
+        <rdfs:comment xml:lang="en">This ontology is designed to relate the academic data from the National University of Loja in their different careers.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Ésta Ontología es diseñada para poder relacionar los datos académicos de la Universidad Nacional de Loja en sus diferentes carreras.</rdfs:comment>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.w3.org/2001/XMLSchema#date -->
+
+    <rdfs:Datatype rdf:about="&xsd;date"/>
+    
+
+
+    <!-- http://www.w3.org/2001/XMLSchema#time -->
+
+    <rdfs:Datatype rdf:about="&xsd;time"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://linkedscience.org/teach/ns#teacher -->
+
+    <owl:ObjectProperty rdf:about="&teach;teacher">
+        <rdfs:label xml:lang="en">teacher</rdfs:label>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#LearningUnit"/>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&teach;teacher"/>
+                <owl:someValuesFrom rdf:resource="&foaf;Person"/>
+            </owl:Restriction>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/requires -->
+
+    <owl:ObjectProperty rdf:about="&dc;requires">
+        <rdfs:label xml:lang="en">requires</rdfs:label>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#AcademicCareer"/>
+        <rdfs:range rdf:resource="http://purl.org/ldau/schema#DegreeRequirements"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/ldau/schema#academicCareer -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/ldau/schema#academicCareer">
+        <rdfs:label xml:lang="en">academicCareer</rdfs:label>
+        <rdfs:domain rdf:resource="&teach;Module"/>
+        <rdfs:range rdf:resource="http://purl.org/ldau/schema#AcademicCareer"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/ldau/schema#academicOffer -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/ldau/schema#academicOffer">
+        <rdfs:label xml:lang="en">academicOffer</rdfs:label>
+        <rdfs:range rdf:resource="http://purl.org/ldau/schema#AcademicOffer"/>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#Enrollment"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/ldau/schema#academicUnit -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/ldau/schema#academicUnit">
+        <rdfs:label xml:lang="en">academicUnit</rdfs:label>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#AcademicCareer"/>
+        <rdfs:range rdf:resource="http://purl.org/ldau/schema#AcademicUnit"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/ldau/schema#assigned -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/ldau/schema#assigned">
+        <rdfs:label xml:lang="en">assigned</rdfs:label>
+        <rdfs:range rdf:resource="http://purl.org/ldau/schema#LearningUnit"/>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#Schedule"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/ldau/schema#hasAcademicLevel -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/ldau/schema#hasAcademicLevel">
+        <rdfs:label xml:lang="en">hasAcademicLevel</rdfs:label>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#AcademicCareer"/>
+        <rdfs:range rdf:resource="http://purl.org/ldau/schema#AcademicLevel"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/ldau/schema#hasCategory -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/ldau/schema#hasCategory">
+        <rdfs:label xml:lang="en">hasCategory</rdfs:label>
+        <rdfs:range rdf:resource="http://purl.org/ldau/schema#OccupationalCategory"/>
+        <rdfs:domain rdf:resource="&foaf;Person"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/ldau/schema#hasMode -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/ldau/schema#hasMode">
+        <rdfs:label xml:lang="en">hasMode</rdfs:label>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#AcademicCareer"/>
+        <rdfs:range rdf:resource="http://purl.org/ldau/schema#Mode"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/ldau/schema#hasRole -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/ldau/schema#hasRole">
+        <rdfs:label xml:lang="en">hasRole</rdfs:label>
+        <rdfs:range rdf:resource="http://purl.org/ldau/schema#Role"/>
+        <rdfs:domain rdf:resource="&foaf;Person"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/ldau/schema#module -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/ldau/schema#module">
+        <rdfs:label xml:lang="en">module</rdfs:label>
+        <rdfs:range rdf:resource="&teach;Module"/>
+        <rdfs:domain rdf:resource="&teach;StudentGroup"/>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#LearningUnit"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/ldau/schema#offered -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/ldau/schema#offered">
+        <rdfs:label xml:lang="en">offered</rdfs:label>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#AcademicCareer"/>
+        <rdfs:range rdf:resource="http://purl.org/ldau/schema#AcademicOffer"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/vocab/aiiso/schema#responsibilityOf -->
+
+    <owl:ObjectProperty rdf:about="&aiiso;responsibilityOf">
+        <rdfs:label xml:lang="en">responsibilityOf</rdfs:label>
+        <rdfs:comment xml:lang="en">Establishes the relationship between an academic unit and the responsability of a person.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Establece la relación entre una Unidad Académica y la responsabilidad de una Persona.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#AcademicCareer"/>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#AcademicUnit"/>
+        <rdfs:range rdf:resource="&foaf;Person"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/vocab/aiiso/schema#responsibleFor -->
+
+    <owl:ObjectProperty rdf:about="&aiiso;responsibleFor">
+        <rdfs:range rdf:resource="http://purl.org/ldau/schema#AcademicActivity"/>
+        <rdfs:domain rdf:resource="&foaf;Person"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/description -->
+
+    <owl:DatatypeProperty rdf:about="&dc;description">
+        <rdfs:label xml:lang="en">description</rdfs:label>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#AcademicActivity"/>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#AcademicOffer"/>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#DegreeRequirements"/>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#OccupationalCategory"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/identifier -->
+
+    <owl:DatatypeProperty rdf:about="&dc;identifier">
+        <rdfs:label xml:lang="en">identifier</rdfs:label>
+        <rdfs:domain rdf:resource="&teach;Module"/>
+        <rdfs:domain rdf:resource="&teach;StudentGroup"/>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#AcademicActivity"/>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#AcademicCareer"/>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#AcademicOffer"/>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#LearningUnit"/>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#OccupationalCategory"/>
+        <owl:propertyDisjointWith rdf:resource="http://purl.org/ldau/schema#identification"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/type -->
+
+    <owl:DatatypeProperty rdf:about="&dc;type">
+        <rdfs:label xml:lang="en">type</rdfs:label>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#Enrollment"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/ldau/schema#academicCredits -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/ldau/schema#academicCredits">
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#LearningUnit"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/ldau/schema#acronym -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/ldau/schema#acronym">
+        <rdfs:label xml:lang="en">acronym</rdfs:label>
+        <rdfs:comment xml:lang="en">Indicates acronyms or abbreviations of the names of the areas or academic units.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Indica las siglas o abreviaturas de los nombres de las áreas o unidades académicas.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#AcademicUnit"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/ldau/schema#credits -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/ldau/schema#credits">
+        <rdfs:label xml:lang="en">credits</rdfs:label>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#LearningUnit"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/ldau/schema#duration -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/ldau/schema#duration">
+        <rdfs:label xml:lang="en">duration</rdfs:label>
+        <rdfs:comment xml:lang="en">Duration of a course, an academic activity and a career.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Tiempo de duración de una asignatura, una actividad académica y  de una carrera.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#AcademicActivity"/>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#AcademicCareer"/>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#LearningUnit"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/ldau/schema#endDate -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/ldau/schema#endDate">
+        <rdfs:label xml:lang="en">endDate</rdfs:label>
+        <rdfs:comment xml:lang="en">End date for enrollment and academic offerings.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Fecha fin para una oferta académica y las matrículas.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#AcademicOffer"/>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#Enrollment"/>
+        <rdfs:range rdf:resource="&xsd;date"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/ldau/schema#endHour -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/ldau/schema#endHour">
+        <rdfs:label xml:lang="en">endHour</rdfs:label>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#Schedule"/>
+        <rdfs:range rdf:resource="&xsd;time"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/ldau/schema#identification -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/ldau/schema#identification">
+        <rdfs:label xml:lang="en">identification</rdfs:label>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain rdf:resource="&foaf;Person"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/ldau/schema#number -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/ldau/schema#number">
+        <rdfs:label xml:lang="en">number</rdfs:label>
+        <rdfs:domain rdf:resource="&teach;Module"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/ldau/schema#quota -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/ldau/schema#quota">
+        <rdfs:label xml:lang="en">quota</rdfs:label>
+        <rdfs:comment xml:lang="en">Maximum number of students for each career.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Número máximo de estudiantes por cada carrera.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#AcademicCareer"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/ldau/schema#required -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/ldau/schema#required">
+        <rdfs:label xml:lang="en">required</rdfs:label>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#LearningUnit"/>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/ldau/schema#section -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/ldau/schema#section">
+        <rdfs:label xml:lang="en">section</rdfs:label>
+        <rdfs:domain rdf:resource="&teach;StudentGroup"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/ldau/schema#senescytCode -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/ldau/schema#senescytCode">
+        <rdfs:label xml:lang="en">senescytCode</rdfs:label>
+        <rdfs:comment xml:lang="en">Senescyt code assigned for each of the approved career.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Código asignado por la Senescyt a cada una de las carreras aprobadas.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#AcademicCareer"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/ldau/schema#startDate -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/ldau/schema#startDate">
+        <rdfs:label xml:lang="en">startDate</rdfs:label>
+        <rdfs:comment xml:lang="en">Start date for enrollment and academic offerings.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Fecha de inicio para una oferta académica y las matrículas.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#AcademicOffer"/>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#Enrollment"/>
+        <rdfs:range rdf:resource="&xsd;date"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/ldau/schema#startHour -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/ldau/schema#startHour">
+        <rdfs:label xml:lang="en">startHour</rdfs:label>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#Schedule"/>
+        <rdfs:range rdf:resource="&xsd;time"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/ldau/schema#weeklyDays -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/ldau/schema#weeklyDays">
+        <rdfs:label xml:lang="en">weeklyDays</rdfs:label>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#Schedule"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/firstName -->
+
+    <owl:DatatypeProperty rdf:about="&foaf;firstName">
+        <rdfs:label xml:lang="en">firstName</rdfs:label>
+        <rdfs:comment xml:lang="en">The first name of a person.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Identifica el nombre de una persona.</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain rdf:resource="&foaf;Person"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/homepage -->
+
+    <owl:DatatypeProperty rdf:about="&foaf;homepage">
+        <rdfs:label xml:lang="en">homepage</rdfs:label>
+        <rdfs:comment xml:lang="en">A homepage for some thing.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Una página web de inicio para algun sitio.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#AcademicCareer"/>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#AcademicUnit"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/lastName -->
+
+    <owl:DatatypeProperty rdf:about="&foaf;lastName">
+        <rdfs:label xml:lang="en">lastName</rdfs:label>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain rdf:resource="&foaf;Person"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/mbox -->
+
+    <owl:DatatypeProperty rdf:about="&foaf;mbox">
+        <rdfs:label xml:lang="en">mbox</rdfs:label>
+        <rdfs:comment xml:lang="en">A personal mailbox, i.e. an Internet mailbox associated with exactly one owner.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Un buzón de correo personal, es decir, un buzón de correo de internet asociado con un dueño.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#AcademicUnit"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/name -->
+
+    <owl:DatatypeProperty rdf:about="&foaf;name">
+        <rdfs:label xml:lang="en">name</rdfs:label>
+        <rdfs:comment xml:lang="en">A name for some thing.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Un nombre para alguna cosa.</rdfs:comment>
+        <rdfs:domain rdf:resource="&teach;Module"/>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#AcademicLevel"/>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#AcademicUnit"/>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#LearningUnit"/>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#Mode"/>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#OccupationalCategory"/>
+        <rdfs:domain rdf:resource="http://purl.org/ldau/schema#Role"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/title -->
+
+    <owl:DatatypeProperty rdf:about="&foaf;title">
+        <rdfs:label xml:lang="en">title</rdfs:label>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain rdf:resource="&foaf;Person"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://linkedscience.org/teach/ns#Module -->
+
+    <owl:Class rdf:about="&teach;Module">
+        <rdfs:label xml:lang="en">Module</rdfs:label>
+        <rdfs:comment xml:lang="en">Represents a minimum unit of study, the teaching-learning process.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Representa una unidad mínima de estudio, del proceso de enseñanza aprendizaje.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://linkedscience.org/teach/ns#StudentGroup -->
+
+    <owl:Class rdf:about="&teach;StudentGroup">
+        <rdfs:label xml:lang="en">StudentGroup</rdfs:label>
+        <rdfs:comment xml:lang="en">Represents the relevant information of a group of students, which is also known as parallel.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Representa la información relevante de un grupo de estudiantes, que también se lo conoce como paralelo.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/ldau/schema#AcademicActivity -->
+
+    <owl:Class rdf:about="http://purl.org/ldau/schema#AcademicActivity">
+        <rdfs:label xml:lang="en">AcademicActivity</rdfs:label>
+        <rdfs:comment xml:lang="en">Contains information about extracurricular activities that meet teachers within his workload.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Contiene información sobre las actividades extracurriculares que cumplen los docentes dentro de su carga de trabajo.</rdfs:comment>
+    </owl:Class>
+    <owl:Axiom>
+        <rdfs:label xml:lang="es">Actividad Académica</rdfs:label>
+        <owl:annotatedTarget xml:lang="es">Contiene información sobre las actividades extracurriculares que cumplen los docentes dentro de su carga de trabajo.</owl:annotatedTarget>
+        <owl:annotatedSource rdf:resource="http://purl.org/ldau/schema#AcademicActivity"/>
+        <owl:annotatedProperty rdf:resource="&rdfs;comment"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://purl.org/ldau/schema#AcademicCareer -->
+
+    <owl:Class rdf:about="http://purl.org/ldau/schema#AcademicCareer">
+        <rdfs:label xml:lang="en">AcademicCareer</rdfs:label>
+        <rdfs:comment xml:lang="en">Contains information with a schema off profesional formation for students who wish to pursue a particular career.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Contiene información con un esquema de formación profesional para los estudiantes que desean seguir una carrera en particular.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/ldau/schema#AcademicLevel -->
+
+    <owl:Class rdf:about="http://purl.org/ldau/schema#AcademicLevel">
+        <rdfs:label xml:lang="en">AcademicLevel</rdfs:label>
+        <rdfs:comment xml:lang="en">Specific the study level of a career, which may be pregraduate and postgraduate.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Específica el nivel de estudios de la carrera, que puede ser de pregrado y postgrado. </rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/ldau/schema#AcademicOffer -->
+
+    <owl:Class rdf:about="http://purl.org/ldau/schema#AcademicOffer">
+        <rdfs:label xml:lang="en">AcademicOffer</rdfs:label>
+        <rdfs:comment xml:lang="en">Is given by careers offered by the University National of Loja, in which a student can enroll.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Está dada por las carreras que ofrece la Universidad Nacional de Loja, en la que un estudiante puede matricularse.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/ldau/schema#AcademicUnit -->
+
+    <owl:Class rdf:about="http://purl.org/ldau/schema#AcademicUnit">
+        <rdfs:label xml:lang="en">AcademicUnit</rdfs:label>
+        <rdfs:comment xml:lang="en">Organization handled into the University for coordinate the various academics themes in your respective careers.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Organización manejada en la Universidad para coordinar los diversos temas académicos en sus respectivas carreras.
+</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/ldau/schema#DegreeRequirements -->
+
+    <owl:Class rdf:about="http://purl.org/ldau/schema#DegreeRequirements">
+        <rdfs:label xml:lang="en">DegreeRequirements</rdfs:label>
+        <rdfs:comment xml:lang="en">Contains a description of some requirements that a student needs to get the career title.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Contiene una descripción de algunos de los requisitos que un estudiante necesita para obtener el título de su carrera.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/ldau/schema#Enrollment -->
+
+    <owl:Class rdf:about="http://purl.org/ldau/schema#Enrollment">
+        <rdfs:label xml:lang="en">Enrollment</rdfs:label>
+        <rdfs:comment xml:lang="en">Specific the dates in which a student can enroll in a career determinate.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Específica las fechas en las que un estudiante puede inscribirse en una determinada carrera.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/ldau/schema#LearningUnit -->
+
+    <owl:Class rdf:about="http://purl.org/ldau/schema#LearningUnit">
+        <rdfs:label xml:lang="en">LearningUnit</rdfs:label>
+        <rdfs:comment xml:lang="en">Known as subject, the same that is taught by a teacher, and that identifies an other module that occurs in a specific schedule.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Conocida como asignatura, la misma que es impartida por un docente, que identifica a un módulo y a demás que se da en un horario especifico.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/ldau/schema#Mode -->
+
+    <owl:Class rdf:about="http://purl.org/ldau/schema#Mode">
+        <rdfs:label xml:lang="en">Mode</rdfs:label>
+        <rdfs:comment xml:lang="en">This class allows differentiate the mode in which are impart the studies: face, blended, and distance.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Esta clase permite diferenciar el modo en el que se imparten los estudios: presencial, semipresencial y distancia.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/ldau/schema#OccupationalCategory -->
+
+    <owl:Class rdf:about="http://purl.org/ldau/schema#OccupationalCategory">
+        <rdfs:label xml:lang="en">OccupationalCategory</rdfs:label>
+        <rdfs:comment xml:lang="en">Allows differentiate the academic position or charge in a academic unit.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Permite diferenciar la posición académica o cargo en una unidad académica.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/ldau/schema#Role -->
+
+    <owl:Class rdf:about="http://purl.org/ldau/schema#Role">
+        <rdfs:label xml:lang="en">Role</rdfs:label>
+        <rdfs:comment xml:lang="en">Identifies a person who fulfills his profesional activities in an academic unit.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Identifica a una persona que cumple su actividad profesional en una unidad académica.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/ldau/schema#Schedule -->
+
+    <owl:Class rdf:about="http://purl.org/ldau/schema#Schedule">
+        <rdfs:label xml:lang="en">Schedule</rdfs:label>
+        <rdfs:comment xml:lang="en">Distribution of the weekdays, with a start hour and a end hour for receive a learning unit or subject in a student group.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Distribución de los días de la semana, con una hora de inicio y una hora final para recibir una unidad de aprendizaje o materia en un grupo de estudiantes.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Person -->
+
+    <owl:Class rdf:about="&foaf;Person">
+        <rdfs:label xml:lang="en">Person</rdfs:label>
+        <rdfs:comment xml:lang="en">Contains information on the academic staff.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Contine información del personal académico.</rdfs:comment>
+    </owl:Class>
+    <rdf:Description>
+        <rdfs:label></rdfs:label>
+    </rdf:Description>
+    <rdf:Description>
+        <rdfs:comment></rdfs:comment>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+
